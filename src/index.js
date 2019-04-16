@@ -89,22 +89,18 @@ export class Mousetrap {
   }
 
   get windowContents() {
-    return fromPairs(Object.entries(this.elements).map(([selector, attributes]) => [
-      // Map through selected dom elements
-      selector,
-      Array.from(document.querySelectorAll(selector)).map(elem => {
-        const attribute_values = {}
-        for (let attribute_name in attributes) {
-          attribute_values[attribute_name] = elem.getAttribute(attribute_name)
-        }
-
-        return Object.assign({},
-          attribute_values,
-          domrect2array(elem.getBoundingClientRect()),
-          extractpadding(elem)
+    const contents = Object.entries(this.elements)
+      .map(([selector, attributes]) => [
+        selector,
+        Array.from(document.querySelectorAll(selector)).map(elem =>
+          Object.assign({},
+            fromPairs(attributes.map(name => [name, elem.getAttribute(name)])),
+            domrect2array(elem.getBoundingClientRect()),
+            extractpadding(elem)
+          )
         )
-      })
-    ]))
+      ])
+    return fromPairs(contents)
   }
 }
 
