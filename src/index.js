@@ -105,9 +105,10 @@ export class Mousetrap {
 }
 
 export class MousetrapPlugin {
-  constructor({ debug=false }={}) {
+  constructor({ debug=false, mode='mousetrap' }={}) {
     this.trap = new Mousetrap()
     this.debug = debug
+    this.mode = mode
   }
 
   handle(context, event) {
@@ -135,7 +136,22 @@ export class MousetrapPlugin {
       console.log('Collected data', this.trap.data)
     }
     this.trap.detach()
-    context.state.mouseData = this.trap.data
+
+    // Log data
+    if (this.mode === 'mousetrap') {
+      // Split data across columns (mousetrap mode)
+      const moves = this.trap.data
+        .filter(e => e.type === 'mousemove')
+      context.state.timestamps = moves.map(m => m.timestamp)
+      context.state.xpos = moves.map(m => m.pageX)
+      context.state.ypos = moves.map(m => m.pageY)
+      context.state.mouseouts = this.trap
+        .filter(e => e.type === 'mouseout')
+        .map(e => e.timestamp)
+    } else {
+      // Save raw event stream
+      context.state.mouseData = this.trap.data
+    }
   }
 }
 
