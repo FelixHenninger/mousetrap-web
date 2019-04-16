@@ -1,0 +1,23 @@
+{
+  "name": "mousetrap-web",
+  "version": "0.1.0",
+  "description": "Mouse-tracking package for the browser",
+  "main": "src/index.js",
+  "dependencies": {
+    "webpack": "^4.30.0"
+  },
+  "devDependencies": {
+    "webpack-command": "^0.3.1"
+  },
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/felixhenninger/mousetrap-web.git",
+  "author": "Felix Henninger <mailbox@felixhenninger.com> (https://felixhenninger.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/felixhenninger/mousetrap-web/issues"
+  },
+  "homepage": "https://github.com/felixhenninger/mousetrap-web#readme"
+}
