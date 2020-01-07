@@ -4,10 +4,10 @@
   "description": "Mouse-tracking package for the browser",
   "main": "src/index.js",
   "dependencies": {
-    "webpack": "^4.30.0"
+    "webpack": "^4.41.5"
   },
   "devDependencies": {
-    "webpack-command": "^0.3.1"
+    "webpack-command": "^0.5.0"
   },
   "scripts": {
     "build": "webpack",
