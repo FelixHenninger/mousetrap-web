@@ -20,6 +20,7 @@ class MousetrapOverlay {
     // Bind event handlers
     this.handleResize = this.handleResize.bind(this)
     this.handleMousemove = this.handleMousemove.bind(this)
+    this.render = this.render.bind(this)
   }
 
   // Calculation / scaling utilities -------------------------------------------
@@ -152,7 +153,16 @@ class MousetrapOverlay {
   }
 
   handleMousemove(e) {
-    this.renderCursor(e.clientX, e.clientY)
+    this._mousePos = [e.clientX, e.clientY]
+  }
+
+  // Render loop ---------------------------------------------------------------
+
+  render() {
+    if (this._mousePos) {
+      this.renderCursor(...this._mousePos)
+    }
+    this._rAF = requestAnimationFrame(this.render)
   }
 
   // Plugin integration --------------------------------------------------------
@@ -163,10 +173,12 @@ class MousetrapOverlay {
       window.addEventListener('resize', this.handleResize)
       this.canvas.addEventListener('mousemove', this.handleMousemove)
       this.canvas.addEventListener('mouseout', this.handleMousemove)
+      this.render()
     } else if (event === 'end') {
       window.removeEventListener('resize', this.handleResize)
       this.canvas.removeEventListener('mousemove', this.handleMousemove)
       this.canvas.removeEventListener('mouseout', this.handleMousemove)
+      cancelAnimationFrame(this._rAF)
     }
   }
 }
