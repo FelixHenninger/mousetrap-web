@@ -156,6 +156,16 @@ class MousetrapOverlay {
     this._mousePos = [e.clientX, e.clientY]
   }
 
+  setCursorPosition(x, y) {
+    const [currentX, currentY] = this._mousePos
+    const [offsetX, offsetY] = this.options.cursorOffset
+
+    this.options.cursorOffset = [
+      (x - currentX) + offsetX,
+      (y - currentY) + offsetY,
+    ]
+  }
+
   // Render loop ---------------------------------------------------------------
 
   render() {
