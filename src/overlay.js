@@ -95,7 +95,7 @@ class MousetrapOverlay {
   }
 
   renderCursor(x=250, y=200) {
-    const { left, right, top, bottom } = this.targetBounds
+    const { left, right, top, bottom } = this.cachedTargetBounds
     const [offsetX, offsetY] = this.options.cursorOffset
     const [newX, clampedX] = clamp(x + offsetX, left, right)
     const [newY, clampedY] = clamp(y + offsetY, top, bottom)
@@ -143,6 +143,7 @@ class MousetrapOverlay {
   init() {
     this.renderBarndoor()
     this.setClipping()
+    this.cachedTargetBounds = this.targetBounds
     this.ctx.globalCompositeOperation = 'copy'
   }
 
