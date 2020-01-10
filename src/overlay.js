@@ -104,7 +104,7 @@ class MousetrapOverlay {
     this.ctx.beginPath()
     this.ctx.arc(
       newX, newY,
-      this.options.cursorSize,
+      this.options.cursorSize * this.cachedScale,
       0, lab.util.geometry.toRadians(360)
     )
     this.ctx.fillStyle = 'rgb(3, 112, 213)'
@@ -144,6 +144,7 @@ class MousetrapOverlay {
     this.renderBarndoor()
     this.setClipping()
     this.cachedTargetBounds = this.targetBounds
+    this.cachedScale = this.scale
     this.ctx.globalCompositeOperation = 'copy'
   }
 
