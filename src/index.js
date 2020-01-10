@@ -145,7 +145,7 @@ export class MousetrapPlugin {
       context.state.timestamps = moves.map(m => m.timestamp)
       context.state.xpos = moves.map(m => m.pageX)
       context.state.ypos = moves.map(m => m.pageY)
-      context.state.mouseouts = this.trap
+      context.state.mouseouts = this.trap.data
         .filter(e => e.type === 'mouseout')
         .map(e => e.timestamp)
     } else {
