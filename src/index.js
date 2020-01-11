@@ -142,15 +142,15 @@ export class MousetrapPlugin {
       // Split data across columns (mousetrap mode)
       const moves = this.trap.data
         .filter(e => e.type === 'mousemove')
-      context.state.timestamps = moves.map(m => m.timestamp)
-      context.state.xpos = moves.map(m => m.pageX)
-      context.state.ypos = moves.map(m => m.pageY)
-      context.state.mouseouts = this.trap.data
+      context.data.timestamps = moves.map(m => m.timestamp)
+      context.data.xpos = moves.map(m => m.pageX)
+      context.data.ypos = moves.map(m => m.pageY)
+      context.data.mouseouts = this.trap.data
         .filter(e => e.type === 'mouseout')
         .map(e => e.timestamp)
     } else {
       // Save raw event stream
-      context.state.mouseData = this.trap.data
+      context.data.mouseData = this.trap.data
     }
   }
 }
