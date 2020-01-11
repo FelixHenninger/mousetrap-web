@@ -106,13 +106,15 @@ export class Mousetrap {
 
 export class MousetrapPlugin {
   constructor({ debug=false, mode='mousetrap' }={}) {
-    this.trap = new Mousetrap()
     this.debug = debug
     this.mode = mode
   }
 
   handle(context, event) {
     switch (event) {
+      case 'plugin:init':
+        this.trap = new Mousetrap()
+        break
       case 'run':
         return this.onRun(context)
       case 'end':
@@ -152,6 +154,7 @@ export class MousetrapPlugin {
       // Save raw event stream
       context.data.mouseData = this.trap.data
     }
+    this.trap = null
   }
 }
 
